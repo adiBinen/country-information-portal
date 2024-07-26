@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { fetchCountries } from '../services/countryService';
+import { fetchCountries } from '../../services/countryService';
+import CountryListItem from '../../components/country-list-item/CountryListItem';
+import './CountriesOverview.scss';
 
 const CountriesOverview = () => {
     const [countries, setCountries] = useState([]);
@@ -17,8 +18,7 @@ const CountriesOverview = () => {
             <ul>
                 {countries.map(country => (
                     <li key={country.id}>
-                        {country.name} - {country.capital}
-                        <Link to={`/country/${country.id}`}>Details</Link>
+                        <CountryListItem country={country}/>
                     </li>
                 ))}
             </ul>

@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import CountriesOverview from './components/CountriesOverview';
-import CountryDetails from './components/CountryDetails';
+import CountriesOverview from './pages/countries-overview/CountriesOverview';
+import CountryDetails from './pages/country-details/CountryDetails';
+import './styles.scss';
 
 function App() {
     return (

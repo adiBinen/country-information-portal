@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchCountry, updateCountry } from '../services/countryService';
+import { fetchCountry, updateCountry } from '../../services/countryService';
+import './CountryDetails.scss';
 
 const CountryDetails = () => {
     const { id } = useParams();
