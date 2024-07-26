@@ -8,28 +8,57 @@ const CountryDetails = () => {
     const [country, setCountry] = useState(null);
 
     useEffect(() => {
-        fetchCountry(id)
-            .then(setCountry)
-            .catch(error => console.error('Error:', error));
+        const getCountryDetails = async () => {
+            try {
+                const fetchedCountry = await fetchCountry(id);
+                setCountry(fetchedCountry);
+            } catch (error) {
+                console.error('Error fetching country details:', error);
+            }
+        };
+
+        getCountryDetails();
     }, [id]);
 
-    const handleUpdate = () => {
-        updateCountry(id, {
-            capital: country.capital,
-            population: country.population,
-        })
-            .then(setCountry)
-            .catch(error => console.error('Error:', error));
+    const handleUpdate = async () => {
+        try {
+            const updatedCountry = await updateCountry(id, {
+                capital: country.capital,
+                population: country.population,
+            });
+            setCountry(updatedCountry);
+        } catch (error) {
+            console.error('Error updating country details:', error);
+        }
     };
 
-    if (!country) return <div>Loading...</div>;
+    const handleChange = (field) => (event) => {
+        setCountry((prevCountry) => ({
+            ...prevCountry,
+            [field]: event.target.value,
+        }));
+    };
 
     return (
-        <div className="details">
+        country && <div className="details">
             <h1>{country.name}</h1>
             <img src={country.flagURL} alt={`${country.name} flag`} />
-            <p>Capital: <input value={country.capital} onChange={(e) => setCountry({...country, capital: e.target.value})} /></p>
-            <p>Population: <input value={country.population} onChange={(e) => setCountry({...country, population: e.target.value})} /></p>
+            <p>
+                Capital:
+                <input
+                    type="text"
+                    value={country.capital}
+                    onChange={handleChange('capital')}
+                />
+            </p>
+            <p>
+                Population:
+                <input
+                    type="text"
+                    value={country.population}
+                    onChange={handleChange('population')}
+                />
+            </p>
             <button onClick={handleUpdate}>Update</button>
         </div>
     );
