@@ -38,7 +38,7 @@ cd country-information-portal
 
 The client will be available at http://localhost:3000.
 
-## Running the Client
+## Running the Server
 
 1. **Navigate to the client directory**:
 
